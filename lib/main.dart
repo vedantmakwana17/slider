@@ -16,7 +16,9 @@ class Slider1 extends StatefulWidget {
 
 class _Slider1State extends State<Slider1> {
   List<String> items = [];
+
   late String? removedItem;
+
   late int? removedIndex;
 
   void _addItem(String newItem) {
