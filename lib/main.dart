@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(
     MaterialApp(
       home: Slider1(),
       debugShowCheckedModeBanner: false,
-
     ),
   );
 }
-
 
 class Slider1 extends StatefulWidget {
   @override
@@ -58,6 +55,48 @@ class _Slider1State extends State<Slider1> {
     });
   }
 
+  void _showAddItemDialog(BuildContext context) {
+    String newItem = '';
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add New Item'),
+          content: TextField(
+            onChanged: (value) {
+              newItem = value;
+            },
+            decoration: const InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              prefixIconColor: Colors.black,
+              hintText: "Enter Text",
+              border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              filled: true,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _addItem(newItem);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,48 +139,6 @@ class _Slider1State extends State<Slider1> {
         },
         child: const Icon(Icons.add),
       ),
-    );
-  }
-
-  void _showAddItemDialog(BuildContext context) {
-    String newItem = '';
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Add New Item'),
-          content: TextField(
-            onChanged: (value) {
-              newItem = value;
-            },
-            decoration: const InputDecoration(
-              labelStyle: TextStyle(color: Colors.black),
-              prefixIconColor: Colors.black,
-              hintText: "Enter Text",
-              border: OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              filled: true,
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _addItem(newItem);
-                Navigator.of(context).pop();
-              },
-              child: const Text('Save'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
